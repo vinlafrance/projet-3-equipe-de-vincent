@@ -64,7 +64,7 @@ if __name__ == "__main__":
         print('manuel')
         PARTIE = initialiser_partie(ARGS.idul)
         ID_PARTIE = PARTIE[0]
-        q = Quoridor(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
+        q = Quoridor(PARTIE[1]['joueurs'])
         print(q)
         while True:
             print('''Type de coup disponible :
