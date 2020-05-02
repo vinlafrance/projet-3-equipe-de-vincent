@@ -8,7 +8,6 @@ Attributes:
     URL (str): Début de l'url du serveur de jeu.
 
 Functions:
-    * lister_parties - Retourne la liste des parties reçus du serveur
     * initialiser_partie - Retourne un tuple constitué de l'identifiant
                            de la partie et de l'état initial du jeu
     * jouer_coup - Retourne un dictionnaire représentant l'état actuel du jeu
@@ -17,61 +16,13 @@ import requests
 
 URL = "https://python.gel.ulaval.ca/quoridor/api"
 
-
-def lister_parties(idul):
-    """Lister les identifiants de vos parties les plus récentes.
-
-    Récupère les parties en effectuant une requête à l'URL cible
-    /quoridor/api/lister/
-
-    Cette requête de type GET s'attend en entrée à recevoir
-    un seul paramètre nommé idul qui identifie son auteur. Elle
-    retourne en JSON un dictionnaire contenant les clés suivantes:
-
-        parties: une liste des (max) 20 parties les plus récentes de l'usager;
-        message (optionnel): un message en cas d'erreur;
-
-    où chaque partie dans la liste est elle-même un dictionnaire
-    contenant les clés suivantes:
-
-        id: l'identifiant de la partie;
-        état: l'état actuel du jeu sous la forme d'un dictionnaire.
-
-    Args
-        idul (str): Identifiant de l'auteur des parties.
-
-    Returns:
-        str: Liste des parties reçues du serveur,
-             après avoir décodé le JSON de sa réponse.
-
-    Raises:
-        RuntimeError: Erreur levée lorsqu'il y a présence d'un message
-            dans la réponse du serveur.
-
-    Examples:
-        >>> idul = "josmi42"
-        >>> parties = lister_parties(idul)
-        >>> print(parties)
-        [{ 'id': 'c1493454-1f7f-446f-9c61-bd7a9d66c92d',
-        'état': { 'joueurs': ..., 'murs': ... }}, ... ]
-    """
-    rep = requests.get(f'{URL}/lister/', params={'idul': idul})
-    if rep.status_code == 200:
-        rep = rep.json()
-        if 'message' in rep:
-            raise RuntimeError(rep['message'])
-    else:
-        raise RuntimeError(f"le REQUESTS sur {URL} a produit le code d'erreur {rep.status_code}.")
-    return rep
-
 def initialiser_partie(idul):
     """Initialiser une nouvelle partie.
 
     Initialise une partie en effectuant une requête à l'URL cible
     /quoridor/api/initialiser/
 
-    Cette requête est de type POST, contrairement à lister_parties,
-    car elle modifie l'état interne du serveur en créant une nouvelle partie.
+    Cette requête est de type POST.
 
     Elle s'attend en entrée à recevoir une seule donnée nommée idul,
     toujours sous la forme d'une chaîne de caractères. Elle retourne
@@ -113,8 +64,7 @@ def jouer_coup(id_partie, type_coup, position):
     Joue un coup en effectuant une requête à l'URL cible
     /quoridor/api/jouer/
 
-    Cette requête est de type POST, contrairement à lister_parties,
-    car elle modifie l'état interne du serveur en créant une nouvelle partie.
+    Cette requête est de type POST.
 
     Elle s'attend à recevoir en entrée trois (3) paramètres associés au POST:
 
