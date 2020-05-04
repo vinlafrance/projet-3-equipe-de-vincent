@@ -258,9 +258,9 @@ class Quoridor:
                                    weights=[probmur1, probmur1, 1 - probmur1 * 2],
                                    k=1)
             if len(j1chemin) > len(j2chemin):
-                choix = 0
+                choix = random.randrange(0, 2)
             if choix == 0:
-                for possible in j2chemin[:-1]:
+                for possible in list(set(j2chemin[:-1]) - set(j1chemin[:-1])):
                     try:
                         self.placer_mur(joueur, possible, 'horizontal')
                         typemove = 'MH'
@@ -310,9 +310,9 @@ class Quoridor:
                                    weights=[probmur2, probmur2, 1 - probmur2 * 2],
                                    k=1)
             if len(j2chemin) > len(j1chemin):
-                choix = 0
+                choix = random.randrange(0, 2)
             if choix == 0:
-                for possible in j1chemin[:-1]:
+                for possible in list(set(j1chemin[:-1]) - set(j2chemin[:-1])):
                     try:
                         self.placer_mur(joueur, possible, 'horizontal')
                         typemove = 'MH'
