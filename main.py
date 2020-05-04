@@ -54,8 +54,11 @@ def analyser_commande():
 
 if __name__ == "__main__":
     ARGS = analyser_commande()
+    PARTIE = initialiser_partie(ARGS.idul)
+    ID_PARTIE = PARTIE[0]
     if ARGS.graphique:
         #objet classe QuoridorX
+        q = QuoridorX(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
         if ARGS.automatique:
             #automatique graphique
             print('automatique et graphique')
@@ -65,8 +68,6 @@ if __name__ == "__main__":
     elif ARGS.automatique:
         #automatique et ascii
         print('automatique et ascii')
-        PARTIE = initialiser_partie(ARGS.idul)
-        ID_PARTIE = PARTIE[0]
         q = Quoridor(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
         print(q)
         while True:
@@ -87,8 +88,6 @@ if __name__ == "__main__":
     else:
         #manuel et ascii
         print('manuel et ascii')
-        PARTIE = initialiser_partie(ARGS.idul)
-        ID_PARTIE = PARTIE[0]
         q = Quoridor(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
         print(q)
         while True:
