@@ -63,8 +63,8 @@ class Quoridor:
             raise QuoridorError("L'argument 'joueurs' n'est pas itérable.")
         if not len(joueurs) == 2:
             raise QuoridorError("L'itérable de joueurs en contient un nombre différent de deux.")
-        self.j1, self.j1mursrestants, self.j1pos = joueurs[0], 10, (5, 1)
-        self.j2, self.j2mursrestants, self.j2pos = joueurs[1], 10, (5, 9)
+        self.j1, self.j1mursrestants, self.j1pos = joueurs[0], 10, tuple((5, 1))
+        self.j2, self.j2mursrestants, self.j2pos = joueurs[1], 10, tuple((5, 9))
         self.murshorizontaux, self.mursverticaux = [], []
         if murs:
             if not isinstance(murs, dict):
@@ -95,7 +95,7 @@ class Quoridor:
             if not 1 <= joueurs[0]['pos'][0] <= 9 or not 1 <= joueurs[0]['pos'][1] <= 9:
                 raise QuoridorError("La position d'un joueur est invalide.")
             self.j1, self.j1mursrestants = joueurs[0]['nom'], joueurs[0]['murs']
-            self.j1pos = joueurs[0]['pos']
+            self.j1pos = tuple(joueurs[0]['pos'])
         if isinstance(joueurs[1], dict):
             if joueurs[1]['murs'] > 10 or joueurs[1]['murs'] < 0:
                 raise QuoridorError('''Le nombre de murs qu'un joueur peut placer est plus grand que
@@ -103,7 +103,7 @@ class Quoridor:
             if not 1 <= joueurs[1]['pos'][0] <= 9 or not 1 <= joueurs[1]['pos'][1] <= 9:
                 raise QuoridorError("La position d'un joueur est invalide.")
             self.j2, self.j2mursrestants = joueurs[1]['nom'], joueurs[1]['murs']
-            self.j2pos = joueurs[1]['pos']
+            self.j2pos = tuple(joueurs[1]['pos'])
         nbmurs += self.j1mursrestants + self.j2mursrestants
         if not nbmurs == 20:
             raise QuoridorError("Le total des murs placés et plaçables n'est pas égal à 20.")

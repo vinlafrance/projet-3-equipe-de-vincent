@@ -64,6 +64,25 @@ if __name__ == "__main__":
     elif ARGS.automatique:
         #automatique et ascii
         print('automatique et ascii')
+        PARTIE = initialiser_partie(ARGS.idul)
+        ID_PARTIE = PARTIE[0]
+        q = Quoridor(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
+        print(q)
+        while True:
+            try:
+                TYPE_COUP, POSITION = q.jouer_coup(1)
+                DAMIER = jouer_coup(ID_PARTIE, TYPE_COUP, POSITION)
+                q = Quoridor(DAMIER['joueurs'], DAMIER['murs'])
+                print(q)
+            except RuntimeError as err:
+                print(err)
+                CHOIX = input("Voulez-vous continuer à jouer, oui ou non? ")
+                if CHOIX.lower() == 'non':
+                    break
+            except StopIteration as err:
+                print(q)
+                print(f'Le grand gagnant est le joueur {err} !\n')
+                break
     else:
         #manuel et ascii
         print('manuel et ascii')
@@ -89,5 +108,6 @@ if __name__ == "__main__":
                 if CHOIX.lower() == 'non':
                     break
             except StopIteration as err:
+                print(q)
                 print(f'Le grand gagnant est le joueur {err} !\n')
                 break
