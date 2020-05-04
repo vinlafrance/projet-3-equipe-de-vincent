@@ -6,8 +6,8 @@ from quoridor import Quoridor
 class QuoridorX(Quoridor):
     def __init__(self, joueurs, murs=None):
         super().__init__(joueurs, murs=None)
-        self.window = turtle.Screen()
-        self.window.setup(width=700, height=500)
+        window = turtle.Screen()
+        window.setup(width=700, height=500)
         self.crayon = turtle.Turtle()
         self.afficher()
 
