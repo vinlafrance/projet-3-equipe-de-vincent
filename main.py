@@ -50,11 +50,12 @@ def analyser_commande():
                         help='Activer le mode automatique.')
     parser.add_argument('-x', '--graphique', action='store_true', dest='graphique',
                         help='Activer le mode graphique.')
-    return parser.parse_args()
+    return parser.parse_args() 
 
 if __name__ == "__main__":
     ARGS = analyser_commande()
     if ARGS.graphique:
+        #objet classe QuoridorX
         if ARGS.automatique:
             #automatique graphique
             print('automatique et graphique')
