@@ -111,9 +111,6 @@ class Quoridor:
         self.graphe = construire_graphe([joueur['pos'] for joueur in self.etat['joueurs']],
                                         self.etat['murs']['horizontaux'],
                                         self.etat['murs']['verticaux'])
-        for posjoueur, objectif in [(self.j1pos, 'B1'), (self.j2pos, 'B2')]:
-            if not nx.has_path(self.graphe, posjoueur, objectif):
-                raise QuoridorError("La position d'un mur est invalide.")
 
     def __str__(self):
         """Représentation en art ascii de l'état actuel de la partie.
