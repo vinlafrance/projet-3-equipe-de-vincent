@@ -43,7 +43,7 @@ class QuoridorX(Quoridor):
         style = ('Courier', 20)
         for ligne, contenu in enumerate(res):
             self.crayon.penup()
-            self.crayon.goto(-325,200 - ligne * 20)
+            self.crayon.goto(-325, 200 - ligne * 20)
             self.crayon.pendown()
             self.crayon.write(contenu, font=style, align='left')
         self.crayon.hideturtle()

@@ -75,7 +75,9 @@ class Quoridor:
                 for indice2, mur2 in enumerate(murs['horizontaux']):
                     if indice == indice2:
                         continue
-                    if (mur2[0], mur2[1]) == (mur[0], mur[1]) or (mur2[0] + 1, mur2[1]) == (mur[0], mur[1]):
+                    if (mur2[0], mur2[1]) == (mur[0], mur[1]):
+                        raise QuoridorError("La position d'un mur est invalide.")
+                    if (mur2[0] + 1, mur2[1]) == (mur[0], mur[1]):
                         raise QuoridorError("La position d'un mur est invalide.")
                 nbmurs += 1
             for indice, mur in enumerate(murs['verticaux']):
@@ -84,7 +86,9 @@ class Quoridor:
                 for indice2, mur2 in enumerate(murs['verticaux']):
                     if indice == indice2:
                         continue
-                    if (mur2[0], mur2[1]) == (mur[0], mur[1]) or (mur2[0], mur2[1] + 1) == (mur[0], mur[1]):
+                    if (mur2[0], mur2[1]) == (mur[0], mur[1]):
+                        raise QuoridorError("La position d'un mur est invalide.")
+                    if (mur2[0], mur2[1] + 1) == (mur[0], mur[1]):
                         raise QuoridorError("La position d'un mur est invalide.")
                 nbmurs += 1
             self.murshorizontaux, self.mursverticaux = murs['horizontaux'], murs['verticaux']
