@@ -1,2 +1,9 @@
-_pycache_
-bundle.git
+# Ignorer l'entièreté des fichiers/dossiers
+*
+# Ne pas ignorer les fichiers suivant
+!/.gitignore
+!/README.md
+!/quoridor.py
+!/quoridorx.py
+!/main.py
+!/api.py
