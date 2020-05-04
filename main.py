@@ -69,7 +69,6 @@ if __name__ == "__main__":
         print('manuel et ascii')
         PARTIE = initialiser_partie(ARGS.idul)
         ID_PARTIE = PARTIE[0]
-        print(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
         q = Quoridor(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
         print(q)
         while True:
