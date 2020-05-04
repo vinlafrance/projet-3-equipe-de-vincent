@@ -243,15 +243,18 @@ class Quoridor:
         Returns:
             Tuple[str, Tuple[int, int]]: Un tuple composé du type et de la position du coup joué.
         """
-        choix = random.randrange(0, 3)
+        probmur1, probmur2 = self.j1mursrestants / 10 * 0.3, self.j2mursrestants / 10 * 0.3
         j1chemin = nx.shortest_path(self.graphe, self.j1pos, 'B1')
         j2chemin = nx.shortest_path(self.graphe, self.j2pos, 'B2')
         test = 0
         if self.partie_terminée():
             raise QuoridorError("La partie est déjà terminée.")
         if joueur == 1:
-            if self.j1mursrestants == 0:
-                choix = 2
+            choix = random.choices(population=[0, 1, 2],
+                                   weights=[probmur1, probmur1, 1 - probmur1 * 2],
+                                   k=1)
+            if len(j1chemin) < len(j2chemin):
+                choix = 0
             if choix == 0:
                 for possible in j2chemin[:-1]:
                     try:
@@ -299,8 +302,11 @@ class Quoridor:
                 typemove = 'D'
                 position = j1chemin[1]
         elif joueur == 2:
-            if self.j2mursrestants == 0:
-                choix = 2
+            choix = random.choices(population=[0, 1, 2],
+                                   weights=[probmur2, probmur2, 1 - probmur2 * 2],
+                                   k=1)
+            if len(j2chemin) < len(j1chemin):
+                choix = 0
             if choix == 0:
                 for possible in j1chemin[:-1]:
                     try:
