@@ -1,14 +1,14 @@
 """Module pour encapsuler la classe QuoridorX, qui fait un affichage graphique.
 """
-import turtle
+import turtle as t
 from quoridor import Quoridor
 
 class QuoridorX(Quoridor):
     def __init__(self, joueurs, murs=None):
-        super().__init__(joueurs, murs=None)
-        window = turtle.Screen()
-        window.setup(width=700, height=500)
-        self.crayon = turtle.Turtle()
+        super().__init__(joueurs, murs)
+        self.window = t.Screen()
+        self.window.setup(width=700, height=500)
+        self.crayon = t.Turtle()
         self.afficher()
 
     def afficher(self):
@@ -20,4 +20,3 @@ class QuoridorX(Quoridor):
             self.crayon.pendown()
             self.crayon.write(contenu, font=style, align='left')
         self.crayon.hideturtle()
-        turtle.done()

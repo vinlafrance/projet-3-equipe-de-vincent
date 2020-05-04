@@ -62,9 +62,47 @@ if __name__ == "__main__":
         if ARGS.automatique:
             #automatique graphique
             print('automatique et graphique')
+            while True:
+                try:
+                    TYPE_COUP, POSITION = q.jouer_coup(1)
+                    DAMIER = jouer_coup(ID_PARTIE, TYPE_COUP, POSITION)
+                    q.window.clearscreen()
+                    q = QuoridorX(DAMIER['joueurs'], DAMIER['murs'])
+                except RuntimeError as err:
+                    print(err)
+                    CHOIX = input("Voulez-vous continuer à jouer, oui ou non? ")
+                    if CHOIX.lower() == 'non':
+                        break
+                except StopIteration as err:
+                    q.window.clearscreen()
+                    q = QuoridorX(DAMIER['joueurs'], DAMIER['murs'])
+                    print(f'Le grand gagnant est le joueur {err} !\n')
+                    break
         else:
             #manuel graphique
             print('manuel et graphique')
+            while True:
+                print('''Type de coup disponible :
+- D : Déplacement
+- MH: Mur Horizontal
+- MV: Mur Vertical\n''')
+                TYPE_COUP = input('Choisissez votre type de coup (D, MH ou MV) : ')
+                PX = input('Définissez la colonne de votre coup : ')
+                PY = input('Définissez la ligne de votre coup : ')
+                try:
+                    DAMIER = jouer_coup(ID_PARTIE, TYPE_COUP, (PX, PY))
+                    q.window.clearscreen()
+                    q = QuoridorX(DAMIER['joueurs'], DAMIER['murs'])
+                except RuntimeError as err:
+                    print(err)
+                    CHOIX = input("Voulez-vous continuer à jouer, oui ou non? ")
+                    if CHOIX.lower() == 'non':
+                        break
+                except StopIteration as err:
+                    q.window.clearscreen()
+                    q = QuoridorX(DAMIER['joueurs'], DAMIER['murs'])
+                    print(f'Le grand gagnant est le joueur {err} !\n')
+                    break
     elif ARGS.automatique:
         #automatique et ascii
         print('automatique et ascii')
