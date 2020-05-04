@@ -257,7 +257,7 @@ class Quoridor:
             choix = random.choices(population=[0, 1, 2],
                                    weights=[probmur1, probmur1, 1 - probmur1 * 2],
                                    k=1)
-            if len(j1chemin) < len(j2chemin):
+            if len(j1chemin) > len(j2chemin):
                 choix = 0
             if choix == 0:
                 for possible in j2chemin[:-1]:
@@ -309,7 +309,7 @@ class Quoridor:
             choix = random.choices(population=[0, 1, 2],
                                    weights=[probmur2, probmur2, 1 - probmur2 * 2],
                                    k=1)
-            if len(j2chemin) < len(j1chemin):
+            if len(j2chemin) > len(j1chemin):
                 choix = 0
             if choix == 0:
                 for possible in j1chemin[:-1]:
