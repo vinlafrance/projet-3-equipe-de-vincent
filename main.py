@@ -54,14 +54,19 @@ def analyser_commande():
 
 if __name__ == "__main__":
     ARGS = analyser_commande()
-    if ARGS.automatique and ARGS.graphique:
-        print('automatique et graphique')
+    if ARGS.graphique:
+        if ARGS.automatique:
+            #automatique graphique
+            print('automatique et graphique')
+        else:
+            #manuel graphique
+            print('manuel et graphique')
     elif ARGS.automatique:
-        print('automatique')
-    elif ARGS.graphique:
-        print('graphique')
+        #automatique et ascii
+        print('automatique et ascii')
     else:
-        print('manuel')
+        #manuel et ascii
+        print('manuel et ascii')
         PARTIE = initialiser_partie(ARGS.idul)
         ID_PARTIE = PARTIE[0]
         print(PARTIE[1]['joueurs'], PARTIE[1]['murs'])
